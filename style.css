@@ -17,3 +17,9 @@ body{
     text-align: center;
     border: 1px solid black;
 }
+.gridItem.black{
+    background-color: black;
+}
+.gridItem.colorful{
+    background-color: red;
+}
