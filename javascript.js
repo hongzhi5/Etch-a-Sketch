@@ -45,9 +45,6 @@ function createGrid(numGrid) {
     gridItem.style.height = gridSize + 'px';
     gridContainer.appendChild(gridItem);
 
-    //gridItem.addEventListener('mouseover', () => {
-        //gridItem.classList.add(`${color}`);
-      //});
     // erase button
     const eraseButton = document.querySelector("#erase");
     eraseButton.addEventListener("click", (event) => {
@@ -63,13 +60,38 @@ gridItems.forEach(gridItem => {
     gridItem.addEventListener('click', () => {
       colorChangingEnabled = !colorChangingEnabled;
   
-      if (colorChangingEnabled) {
+      if (colorChangingEnabled && color == "black") {
+        gridItem.classList.remove("colorful");
         gridItem.classList.add(`${color}`);
   
         gridItems.forEach(item => {
           item.addEventListener('mouseenter', () => {
-            if (colorChangingEnabled) {
-              item.classList.add(`${color}`);
+            if (colorChangingEnabled && color == "black") {
+                item.classList.remove("colorful");
+                item.classList.add(`${color}`);
+            }
+          });
+        });
+      } else if (colorChangingEnabled && color == "colorful") {
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let randomColor = '#';
+            for (let i = 0; i < 6; i++) {
+                randomColor += letters[Math.floor(Math.random() * 16)];
+            }
+            return randomColor;
+          }
+        gridItem.classList.add(`${color}`);
+        const colorful = document.querySelector(".colorful");
+        const randomColor = getRandomColor();
+        colorful.style.setProperty('--color', randomColor);
+       
+        gridItems.forEach(item => {
+          item.addEventListener('mouseenter', () => {
+            if (colorChangingEnabled && color == "colorful") {
+                item.classList.add(`${color}`);
+                const randomColor = getRandomColor();
+                item.style.setProperty('--color', randomColor);
             }
           });
         });
@@ -81,7 +103,6 @@ gridItems.forEach(gridItem => {
       }
     });
   });
-
 // make sure the grids won't overflow and the container's size won't change
   const containerWidth = gridContainer.offsetWidth; // Get container width
   const itemSize = containerWidth / numGrid; // Calculate grid item size
