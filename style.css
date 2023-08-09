@@ -30,7 +30,8 @@ h1{
 }
 #black,
 #colorful,
-#erase{
+#erase,
+#darken{
     font-family: 'Rocher';
     font-size: 20px;
     margin: 7px;
@@ -43,6 +44,14 @@ h1{
 }
 #black:hover{
     background-color: black;
+    animation:slidebg 5s linear infinite;
+}
+#darken:hover {
+    background-image: linear-gradient(90deg, #f7f7f7 0%, #eeeeee 25%, #929aab 65%, #393e46 100%);
+    animation:slidebg 5s linear infinite;
+}
+#erase:hover{
+    background-color: #ec729c;
     animation:slidebg 5s linear infinite;
 }
 #sliderContainer{
@@ -70,4 +79,6 @@ h1{
 .gridItem.colorful{
     background-color: var(--color);
 }
-
+.gridItem.darken {
+    background-color: lightgray;
+}
